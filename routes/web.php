@@ -3,6 +3,7 @@
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CrewController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\NationalController;
 use App\Http\Controllers\PortController;
@@ -39,6 +40,7 @@ Route::group(['middleware' => ['auth', 'can:isAdmin']], function () {
     Route::resource('/admin/port', PortController::class);
     Route::resource('/admin/ship', ShipController::class);
     Route::resource('/admin/job', JobController::class);
+    Route::resource('/admin/exp', ExperienceController::class);
 
     // Route::get('/profile/{id}', [App\Http\Controllers\CrewController::class, 'show'])->name('profile.show');
     // Route::post('/profile/create', [App\Http\Controllers\CrewController::class, 'store'])->name('profile.store');

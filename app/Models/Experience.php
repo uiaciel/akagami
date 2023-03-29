@@ -2,22 +2,26 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Crew extends Model
+class Experience extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function crew()
+    {
+        return $this->belongTo('App\Models\Crew');
+    }
 
     public function job()
     {
         return $this->belongsTo('App\Models\Job', 'job_id');
     }
 
-    public function age()
+    public function shipname()
     {
-        return Carbon::parse($this->birth)->age;
+        return $this->belongsTo('App\Models\Ship', 'vesselsname');
     }
 }

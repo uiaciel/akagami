@@ -9,4 +9,9 @@ class Job extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function crew()
+    {
+        return $this->hasOne('App\Models\Crew');
+    }
 }
