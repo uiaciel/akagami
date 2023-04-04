@@ -8,6 +8,7 @@
                 <div class="alert alert-primary" role="alert">
                     {{ $crew->subid }}
                 </div>
+
             </div>
         </div>
 
@@ -389,7 +390,7 @@
 
                 <div class="card tab-content">
                     <div id="profiles" class="tab-pane fade active show">
-                        <div class="card-body">
+                        <div class="card-body" id="printini">
                             <form onsubmit="return confirm('Are you sure?');"
                                 action="{{ route('crew.update', $crew->id) }}" enctype="multipart/form-data"
                                 method="POST">
@@ -419,10 +420,10 @@
                                             <div class="col-sm-7">
 
                                                 <select class="form-select" name="passport_id" id="passport">
-                                                    {{-- @foreach ($docs->where('type', 'Passport') as $passport)
+                                                    @foreach ($docs->where('type', 'Passport') as $passport)
                                                         <option value="{{ $passport->id }}">{{ $passport->no }}
                                                         </option>
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -585,7 +586,7 @@
                                             <label class="col-sm-5">最終経歴<br>Last Vessel</label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control" value="{{ $lastvessel }}">
-                                                <input type="text" class="form-control">
+
                                             </div>
                                             <label for="" class="col-sm-5">下船日<br>Sign Off</label>
                                             <div class="col-sm-7">
@@ -637,9 +638,9 @@
                                             <label for="" class="col-sm-5">職種<br>Job</label>
                                             <div class="col-sm-7">
                                                 <select class="form-select" name="job_id">
-                                                    {{-- <option value="{{ $crew->job->id }}">{{ $crew->job->code }}
+                                                    <option value="{{ $crew->job->id }}">{{ $crew->job->code }}
                                                         ({{ $crew->job->name }})
-                                                    </option> --}}
+                                                    </option>
                                                     @foreach ($jobs as $job)
                                                         <option value="{{ $job->id }}">{{ $job->code }}
                                                             ({{ $job->name }})
@@ -806,20 +807,20 @@
                                     </div>
                                 </div>
                                 <style>
-                                    table {
+                                    #tableexp {
                                         width: 100%;
                                     }
 
-                                    tr,
-                                    th,
-                                    td {
+                                    #tableexp tr,
+                                    #tableexp th,
+                                    #tableexp td {
                                         border: 1px solid;
                                         text-align: center;
                                         font-size: 9px;
                                         padding: 5px;
                                     }
                                 </style>
-                                <table>
+                                <table id="tableexp">
                                     <thead>
                                         <tr>
                                             <th>船名<br>Vessel Name</th>
@@ -880,7 +881,14 @@
 
 
                     </div>
+
                 </div>
+
+                @include('crew.certificate')
+                @include('crew.medical')
+                @include('crew.contract')
+                @include('crew.document')
+                @include('crew.contact')
             </div>
         </div>
 

@@ -8,22 +8,18 @@ use App\Models\Crew;
 use App\Models\Document;
 use App\Models\Experience;
 use App\Models\Medical;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class CrewController extends Controller
+use App\Models\Preview;
+use Illuminate\Http\Request;
+
+class PreviewController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
-        $crew = Crew::All();
-
-        return view('crew.index', [
-            'crew' => $crew
-        ]);
+        //
     }
 
     /**
@@ -31,7 +27,7 @@ class CrewController extends Controller
      */
     public function create()
     {
-        return view('crew.create');
+        //
     }
 
     /**
@@ -39,15 +35,7 @@ class CrewController extends Controller
      */
     public function store(Request $request)
     {
-        $crew = new Crew;
-        $crew->subid = $request->subid;
-        $crew->name = $request->name;
-        $crew->birth = $request->birth;
-        $crew->place = $request->place;
-        $crew->job_id = $request->job_id;
-        $crew->save();
-
-        return redirect()->route('crew.show', $request->subid)->with('successs', 'Data Berhasil disimpan');
+        //
     }
 
     /**
@@ -55,7 +43,6 @@ class CrewController extends Controller
      */
     public function show($id)
     {
-
         $crew = Crew::where('subid', $id)->first();
         $exp = Experience::where('crew_id', $crew->id)->OrderBy('signoff', 'asc')->get();
         $tahunlama = Experience::where('crew_id', $crew->id)->OrderBy('signon', 'asc')->pluck('signon')->first();
@@ -65,7 +52,7 @@ class CrewController extends Controller
         $medical = Medical::where('crew_id', $crew->id)->get();
         $contract = Contract::where('crew_id', $crew->id)->get();
 
-        return view('crew.show', [
+        return view('crew.print', [
             'crew' => $crew,
             'exp' => $exp,
             'tahun' => $tahunlama,
@@ -81,7 +68,7 @@ class CrewController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Crew $crew)
+    public function edit(Preview $preview)
     {
         //
     }
@@ -89,26 +76,15 @@ class CrewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Crew $crew)
+    public function update(Request $request, Preview $preview)
     {
-        $crew->update($request->all());
-
-        if ($request->hasfile('photo')) {
-            $nama = time() . '-' . $request->file('photo')->getClientOriginalName();
-            $path = $request->file('photo')->storeAs('photo', $nama, ['disk' => 'public']);
-            $image = $path;
-            $crew->update(['photo' => $image]);
-        }
-
-        // toast('Berhasil di update', 'success');
-        return redirect()->back()
-            ->with('success', 'Crew updated successfully');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Crew $crew)
+    public function destroy(Preview $preview)
     {
         //
     }

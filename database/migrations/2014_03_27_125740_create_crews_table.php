@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('nationaly')->default('Indonesia');
             $table->string('photo')->nullable();
-
+            $table->string('job_id')->nullable();
             $table->string('visa_id')->nullable();
             $table->string('passport_id')->nullable();
             $table->string('orangebook_id')->nullable();

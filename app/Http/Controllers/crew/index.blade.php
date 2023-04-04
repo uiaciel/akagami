@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.main')
 @section('content')
     <div class="bg-primary pt-10 pb-21"></div>
     <div class="container-fluid mt-n22 px-6">
@@ -12,76 +12,7 @@
                         </div>
                         <div>
 
-                            {{-- <a href="{{ route('crew.create') }}" class="btn btn-white">Add New Crew</a> --}}
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcrew">
-                                Add New Crew
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="newcrew" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog        ">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Add New Crew</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <form action="{{ route('crew.store') }}" method="post">
-                                            @csrf
-
-                                            <div class="modal-body">
-
-                                                <div class="mb-3">
-                                                    <label for="exampleInputText1" class="form-label">ID</label>
-                                                    <input type="text" class="form-control" name="subid">
-
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="exampleInputText1" class="form-label">Name</label>
-                                                    <input type="text" class="form-control" name="name">
-
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="exampleInputText1" class="form-label">Place of Birth</label>
-                                                    <input type="text" class="form-control" name="place">
-
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="exampleInputText1" class="form-label">Date of Birth</label>
-                                                    <input type="date" placeholder="YYYY/MM/DD" class="form-control"
-                                                        name="birth">
-
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="exampleInputText1" class="form-label">Job</label>
-                                                    <select class="form-select" name="job_id">
-
-                                                        @foreach ($jobs as $job)
-                                                            <option value="{{ $job->id }}">{{ $job->code }}
-                                                                ({{ $job->name }})
-                                                            </option>
-                                                        @endforeach
-
-                                                    </select>
-
-                                                </div>
-
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Create</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            <a href="{{ route('crew.create') }}" class="btn btn-white">Add New Crew</a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +35,7 @@
                                         role="tab">All <span
                                             class="badge rounded-pill bg-primary">{{ $crew->count() }}</span></a>
                                 </li>
-                                {{-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a id="tab-onboard" href="#onboard" class="nav-link" data-bs-toggle="tab"
                                         role="tab">On-board Crews<span
                                             class="badge rounded-pill bg-primary">{{ $crew->where('status', 'On board')->count() }}</span></a>
@@ -121,7 +52,7 @@
                                         role="tab">Unstand-by Crews
                                         <span
                                             class="badge rounded-pill bg-primary">{{ $crew->where('status', 'Unstand-by')->count() }}</span></a>
-                                </li> --}}
+                                </li>
 
 
                             </ul>
@@ -145,9 +76,9 @@
                                         <select class="form-select" name="carijob">
                                             <option selected>== SELECT JOB ==</option>
 
-                                            {{-- @foreach ($jobs as $job)
+                                            @foreach ($jobs as $job)
                                                 <option value="1">{{ $job->name }}</option>
-                                            @endforeach --}}
+                                            @endforeach
 
                                         </select>
 
@@ -192,25 +123,21 @@
                                         @foreach ($crew as $index => $crews)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td><a
-                                                        href="{{ route('crew.show', $crews->subid) }}">{{ $crews->subid }}</a>
-                                                </td>
+                                                <td><a href="/crew/{{ $crews->subid }}">{{ $crews->subid }}</a></td>
                                                 <td>{{ $crews->name }}</td>
                                                 <td>{{ $crews->birth }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($crews->birth)->diff(\Carbon\Carbon::now())->y }}
                                                 </td>
-                                                <td>{{ $crews->job->code ?? '' }}</td>
+                                                <td>{{ $crews->job->code }}</td>
                                                 <td>{{ $crews->passport->no ?? 'PASSPORT NO' }}</td>
                                                 <td>
                                                     <div class="input-group mb-3">
 
                                                         <a href="{{ route('crew.show', $crews->subid) }}"
-                                                            class="btn btn-sm btn-outline-primary"
-                                                            target="_blank">View</a>
+                                                            class="btn btn-sm btn-outline-primary" target="_blank">View</a>
 
                                                         <a href="/print/crew/{{ $crews->subid }}"
-                                                            class="btn btn-sm btn-outline-success"
-                                                            target="_blank">Print</a>
+                                                            class="btn btn-sm btn-outline-success" target="_blank">Print</a>
                                                     </div>
 
                                                 </td>
@@ -251,12 +178,10 @@
                                                 <td>
                                                     <div class="input-group mb-3">
                                                         <a href="{{ route('crew.show', $onboard->subid) }}"
-                                                            class="btn btn-sm btn-outline-primary"
-                                                            target="_blank">View</a>
+                                                            class="btn btn-sm btn-outline-primary" target="_blank">View</a>
 
                                                         <a href="/print/crew/{{ $onboard->subid }}"
-                                                            class="btn btn-sm btn-outline-success"
-                                                            target="_blank">Print</a>
+                                                            class="btn btn-sm btn-outline-success" target="_blank">Print</a>
                                                     </div>
 
                                                 </td>

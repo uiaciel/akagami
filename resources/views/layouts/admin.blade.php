@@ -539,7 +539,8 @@
         $(document).ready(function() {
             datat = $('.datatable').DataTable({
 
-                "dom": 'lrtip'
+                "dom": 'lrtip',
+                "pageLength": 50
 
 
             });
