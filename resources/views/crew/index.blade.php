@@ -17,6 +17,7 @@
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcrew">
                                 Add New Crew
                             </button>
+                            <button id="button">Row count</button>
 
                             <!-- Modal -->
                             <div class="modal fade" id="newcrew" tabindex="-1" aria-labelledby="exampleModalLabel"

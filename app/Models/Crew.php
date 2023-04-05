@@ -20,4 +20,9 @@ class Crew extends Model
     {
         return Carbon::parse($this->birth)->age;
     }
+
+    public function ordercrew()
+    {
+        return $this->belongsTo('App\Models\Ordercrew', 'crew_id');
+    }
 }

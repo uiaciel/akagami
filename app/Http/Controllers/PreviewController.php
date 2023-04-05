@@ -19,7 +19,7 @@ class PreviewController extends Controller
      */
     public function index()
     {
-        //
+        return view('print.index');
     }
 
     /**
@@ -35,7 +35,38 @@ class PreviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->data);
+
+        $data = collect($request->data);
+        // return $data;
+
+        $to = $request->to;
+        $from = $request->from;
+        $date = $request->date;
+        $embark = $request->embark;
+        $attn = $request->attn;
+        $vassel = $request->vassel;
+        $signoff = $request->signoff;
+        $port = $request->port;
+
+
+        $crew = Crew::whereIn('id', $data)->get();
+        // dd($crew);
+        return view('print.crews', [
+            'crewx' => $crew,
+            'to' => $to,
+            'from' => $from,
+            'date' => $date,
+            'embark' => $embark,
+            'attn' => $attn,
+            'vassel' => $vassel,
+            'signoff' => $signoff,
+            'port' => $port,
+        ]);
+    }
+
+    public function crews(Request $request)
+    {
     }
 
     /**
@@ -62,6 +93,17 @@ class PreviewController extends Controller
             'contracts' => $contract,
             'certificates' => $certificate
 
+        ]);
+    }
+
+    public function shows($data)
+    {
+
+        $datanya = collect($data);
+
+        $crew = Crew::whereIn('id', $datanya)->get();
+        return view('crew.test', [
+            'crew' => $crew
         ]);
     }
 

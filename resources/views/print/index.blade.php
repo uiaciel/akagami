@@ -1,0 +1,139 @@
+@extends('layouts.admin')
+@section('content')
+    <div class="bg-primary pt-10 pb-21"></div>
+    <div class="container-fluid mt-n22 px-6">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+                <!-- Page header -->
+                <div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="mb-2 mb-lg-0">
+                            <h3 class="mb-0  text-white">Print</h3>
+                        </div>
+                        <div>
+
+                            {{-- <a href="{{ route('crew.create') }}" class="btn btn-white">Create Profile</a> --}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-dark">
+                        <h5 class="text-white">Print Crew's CV</h5>
+                    </div>
+                    <div class="card-body">
+
+
+                        <form action="{{ route('print.store') }}" method="POST">
+                            @csrf
+
+                            <div class="row mb-1">
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="inputGroupSelect01"
+                                            style=" width: 68px; ">To:</label>
+                                        <select class="form-select" id="inputGroupSelect01" name="to">
+                                            <option value="PT. KLIEN SENDIRI">PT. KLIEN SENDIRI</option>
+                                            {{-- @foreach ($kliens as $klien)
+                                                <option value="{{ $klien->id }}">{{ $klien->nama }}</option>
+                                            @endforeach --}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group">
+                                            <label class="input-group-text"
+                                                for="inputGroupSelect01"style=" width: 68px; ">From:</label>
+                                            <select class="form-select" id="inputGroupSelect01" name="from">
+                                                <option value="PT. PERUSAHAAN SENDIRI">PT. PERUSAHAAN SENDIRI</option>
+                                                {{-- @foreach ($companys as $company)
+                                                    <option value="{{ $company->id }}">{{ $company->nama }}</option>
+                                                @endforeach --}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"style=" width: 68px; ">Attn:</span>
+                                        <input type="text" class="form-control" aria-label="Username"
+                                            aria-describedby="basic-addon1" name="attn">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1" style=" width: 68px; ">Date:</span>
+                                        <input type="text" class="form-control date" placeholder="yyyy/mm/dd"
+                                            name="date">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row ">
+                                <div class="col-1 p-1 ms-2" style=" width: 6%; ">
+                                    <label for="" class="ms-1"><small>船名<br>Vessel Name</small></label>
+
+                                </div>
+                                <div class="col-2 me-2 p-1">
+
+                                    <input type="text" class="form-control" name="vassel" placeholder="SHOSHIN MARU 83">
+
+                                </div>
+
+                                <div class="col-1 p-1 me-3">
+                                    <label for="" class="">派遣日<br><small>Embarkation Date</small></label>
+                                </div>
+                                <div class="col-1 p-1 me-3">
+                                    <input type="text" class="form-control date me-3" name="embark" value=""
+                                        placeholder="yyyy/mm/dd">
+                                </div>
+                                <div class="col-1 me-3 p-1">
+                                    <label class="">下船予定日<br><small>Estimated Sign Off</small>
+                                    </label>
+                                </div>
+                                <div class="col-1 me-3 p-1">
+                                    <input type="text" class="form-control date me-3" name="signoff" value=""
+                                        placeholder="yyyy/mm/dd">
+                                </div>
+
+                                <div class="col-1 me-3 p-1">
+                                    <label class="p-1">派遣港<br><small>Embarkation Port</small>
+                                    </label>
+                                </div>
+                                <div class="col-3 p-1">
+                                    <select class="form-select" name="port">
+                                        @foreach ($ports as $port)
+                                            <option value="{{ $port->name }}">{{ $port->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- <input type="text" class="form-control" name="subid" value="" placeholder="LAS PALMAS"> --}}
+                                </div>
+                            </div>
+
+                            <div class="mt-3">
+                                <label for="" class="form-label">Select Crews</label>
+
+                                <select class="form-select" name="data[]" multiple aria-label="multiple select example">
+
+                                    @foreach ($crews as $crew)
+                                        <option value="{{ $crew->id }}">{{ $crew->name }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm mt-3">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+@endsection

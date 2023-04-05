@@ -35,6 +35,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/print/crew/{id}', [PreviewController::class, 'show']);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth', 'can:isAdmin']], function () {
@@ -52,7 +53,7 @@ Route::group(['middleware' => ['auth', 'can:isAdmin']], function () {
     Route::resource('/admin/contract', ContractController::class);
     Route::resource('/admin/certificate', CertificateController::class);
     Route::resource('/admin/medical', MedicalController::class);
-
+    Route::resource('/admin/print', PreviewController::class);
 
 
 

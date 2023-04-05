@@ -153,6 +153,12 @@
                                 </i> Crew Database
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link has-arrow " href="{{ route('print.index') }}">
+                                <i data-feather="clipboard" class="nav-icon icon-xs me-2">
+                                </i> Crew Print
+                            </a>
+                        </li>
                     @endcan
                     {{-- <li class="nav-item">
                         <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse"
@@ -544,7 +550,18 @@
 
 
             });
+            //selected row
+            $('.datatable tbody').on('click', 'tr', function() {
+                $(this).toggleClass('selected');
+            });
+            //tombol action selected
+            $('#button').click(function() {
+                // alert(table.rows('.selected').data().length + ' row(s) selected');
+                datanya = datat.rows('.selected').data()
 
+            });
+
+            //form cari data
             $('#caridata').keyup(function() {
                 datat.search($(this).val()).draw();
             })

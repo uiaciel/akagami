@@ -5,11 +5,13 @@ namespace App\Providers;
 use App\Models\Company;
 use App\Models\Crew;
 use App\Models\Currency;
+use App\Models\Document;
 use App\Models\Job;
 use App\Models\National;
 use App\Models\Port;
 use App\Models\Ship;
 use App\Models\User;
+use App\Models\Experience;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -37,7 +39,9 @@ class AppServiceProvider extends ServiceProvider
                 'shipnames' => Ship::all(),
                 'currencies' => Currency::all(),
                 'ports' => Port::all(),
-                'nationals' => National::all()
+                'nationals' => National::all(),
+                'documents' => Document::all(),
+                'experiences' => Experience::all()
             ]);
         });
     }

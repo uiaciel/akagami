@@ -41,10 +41,10 @@
         .page {
             padding: 5mm;
             margin: 0 0 10mm auto;
-            border: 1px #D3D3D3 solid;
-            border-radius: 5px;
+            /* border: 1px #D3D3D3 solid;
+            border-radius: 5px; */
             background: white;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); */
         }
 
         .tableFixHead {
@@ -131,6 +131,10 @@
             .form-select {
                 color: black;
                 border: 1px solid hwb(234deg 0% 45%);
+            }
+
+            footer {
+                page-break-after: always;
             }
         }
     </style>

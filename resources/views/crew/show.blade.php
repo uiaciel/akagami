@@ -558,10 +558,10 @@
                                             <label class="col-sm-5 fs-6">船員手帳<br>Seaman Book</label>
                                             <div class="col-sm-7">
                                                 <select class="form-select" id="seaman" name="seamanbook_id">
-                                                    {{-- @foreach ($docs->where('type', 'Seaman Book') as $seaman)
+                                                    @foreach ($docs->where('type', 'Seaman Book') as $seaman)
                                                         <option value="{{ $seaman->id }}">{{ $seaman->no }}
                                                         </option>
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <label class="col-sm-5">発給日<br>Issued Date</label>
@@ -715,10 +715,10 @@
                                             <div class="col-sm-8">
 
                                                 <select class="form-select" id="vissa" name="visa_id">
-                                                    {{-- @foreach ($docs->where('type', 'Entry Visa') as $vissa)
+                                                    @foreach ($docs->where('type', 'Entry Visa') as $vissa)
                                                         <option value="{{ $vissa->id }}">{{ $vissa->no }}
                                                         </option>
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </select>
 
                                             </div>
@@ -746,10 +746,10 @@
                                                 style=" font-size: smaller; ">オレンジブック<br>Orange Book</label>
                                             <div class="col-sm-7">
                                                 <select class="form-select" id="orange" name="orangebook_id">
-                                                    {{-- @foreach ($docs->where('type', 'Orange Book') as $orange)
+                                                    @foreach ($docs->where('type', 'Orange Book') as $orange)
                                                         <option value="{{ $orange->id }}">{{ $orange->no }}
                                                         </option>
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <label class="col-sm-5">発給日<br>Issued Date</label>
