@@ -8,13 +8,87 @@
                 <div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="mb-2 mb-lg-0">
-                            <h3 class="mb-0  text-white">Dashboard Crew</h3>
-                        </div>
-                        <div>
+                            <h3 class="mb-0  text-white">Welcome, {{ Auth::User()->role }}.
 
-                            {{-- <a href="{{ route('crew.create') }}" class="btn btn-white">Create Profile</a> --}}
-
+                            </h3>
                         </div>
+
+                        @if (!Auth::User()->profile)
+                            <div>
+
+                                {{-- <a href="{{ route('crew.create') }}" class="btn btn-white">Create Profile</a> --}}
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                                    data-bs-target="#crewcreate">
+                                    Create Profile
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="crewcreate" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ route('profile.store') }}" method="POST">
+                                                @csrf
+
+
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputText1" class="form-label">Name</label>
+                                                        <input type="text" name="name" class="form-control"
+                                                            id="exampleInputText1" aria-describedby="textHelp">
+
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputText1" class="form-label">Subid</label>
+                                                        <input type="text" name="subid" class="form-control"
+                                                            id="exampleInputText1" aria-describedby="textHelp">
+
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputText1" class="form-label">Place</label>
+                                                        <input type="text" name="place" class="form-control"
+                                                            id="exampleInputText1" aria-describedby="textHelp">
+
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputText1" class="form-label">Birth</label>
+                                                        <input type="date" name="birth" class="form-control"
+                                                            id="exampleInputText1" aria-describedby="textHelp">
+
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <select class="form-select" name="job_id">
+
+                                                            @foreach ($jobs as $job)
+                                                                <option value="{{ $job->id }}">{{ $job->code }}
+                                                                    ({{ $job->name }})
+                                                                </option>
+                                                            @endforeach
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+
                     </div>
                 </div>
             </div>
@@ -23,10 +97,22 @@
             <div class="col-4">
                 <div class="card">
                     <div class="card-header bg-dark">
-                        <h5 class="text-white">Add Company</h5>
+                        <h5 class="text-white">Data User</h5>
                     </div>
                     <div class="card-body">
 
+                        <div class="mb-3">
+                            <div class="form-group mb-3">
+                                <label for="exampleInputEmail1">Username</label>
+                                <input type="text" name="nama" class="form-control" value="{{ Auth::User()->name }}"
+                                    id="exampleInputEmail1" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                <input type="text" name="nama" class="form-control" value="{{ Auth::User()->email }}"
+                                    id="exampleInputEmail1" readonly>
+                            </div>
+                        </div>
 
                         {{-- <form action="{{ route('company.store') }}" method="POST">
                             @csrf
@@ -50,12 +136,30 @@
                 </div>
             </div>
             <div class="col-8">
-                <div class="card">
-                    <div class="card-header bg-dark text-white">
-                        <h5 class="text-white">Company List</h5>
-                    </div>
-                    <div class="card-body">
-                        {{-- <table class="table table-striped table-bordered">
+                @if (Auth::User()->profile)
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="text-white">Data Crew</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="form-group mb-3">
+                                <label for="exampleInputEmail1">Crew ID</label>
+                                <input type="text" name="nama" class="form-control"
+                                    value="{{ Auth::User()->profile->crew->subid }}" id="exampleInputEmail1" readonly>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="exampleInputEmail1">Crew Name</label>
+                                <input type="text" name="nama" class="form-control"
+                                    value="{{ Auth::User()->profile->crew->name }}" id="exampleInputEmail1" readonly>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="exampleInputEmail1">Crew Job</label>
+                                <input type="text" name="nama" class="form-control"
+                                    value="{{ Auth::User()->profile->crew->job->name }}" id="exampleInputEmail1" readonly>
+                            </div>
+
+                            {{-- <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -153,8 +257,9 @@
                                 @endforeach
                             </tbody>
                         </table> --}}
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>

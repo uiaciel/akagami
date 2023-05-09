@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('can:isAdmin');
+    }
+
     public function index()
     {
         $companys = Company::all();

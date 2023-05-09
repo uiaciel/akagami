@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class PortController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('can:isAdmin');
+    }
+
     public function index()
     {
         $ports = Port::all();

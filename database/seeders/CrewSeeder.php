@@ -18,7 +18,8 @@ class CrewSeeder extends Seeder
         //create user
         $user = new User;
         $user->name = "Admin";
-        $user->email = "mwn.surya@gmail.com";
+        $user->email = "admin@admin.com";
+        $user->role = "Admin";
         $user->password = bcrypt('admin123');
         $user->save();
 

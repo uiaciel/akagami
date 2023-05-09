@@ -8,28 +8,18 @@ use App\Models\Crew;
 use App\Models\Document;
 use App\Models\Experience;
 use App\Models\Medical;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
-class CrewController extends Controller
+class ProfileController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('can:isAdmin')->only(['index', 'create', 'show']);
-
-        // $this->middleware('subscribed')->except('store');
-    }
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-
-        $crew = Crew::All();
-
-        return view('crew.index', [
-            'crew' => $crew
-        ]);
+        //
     }
 
     /**
@@ -37,7 +27,6 @@ class CrewController extends Controller
      */
     public function create()
     {
-        return view('crew.create');
     }
 
     /**
@@ -53,7 +42,13 @@ class CrewController extends Controller
         $crew->job_id = $request->job_id;
         $crew->save();
 
-        return redirect()->route('crew.show', $request->subid)->with('successs', 'Data Berhasil disimpan');
+
+        $profile = new Profile;
+        $profile->user_id = Auth::id();
+        $profile->crew_id = $crew->id;
+        $profile->save();
+
+        return redirect()->route('profile.show', $request->subid)->with('successs', 'Data Berhasil disimpan');
     }
 
     /**
@@ -61,7 +56,6 @@ class CrewController extends Controller
      */
     public function show($id)
     {
-
         $crew = Crew::where('subid', $id)->first();
         $exp = Experience::where('crew_id', $crew->id)->OrderBy('signoff', 'asc')->get();
         $tahunlama = Experience::where('crew_id', $crew->id)->OrderBy('signon', 'asc')->pluck('signon')->first();
@@ -87,7 +81,7 @@ class CrewController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Crew $crew)
+    public function edit(profile $profile)
     {
         //
     }
@@ -95,28 +89,15 @@ class CrewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Crew $crew)
+    public function update(Request $request, profile $profile)
     {
-
-        $crew->update($request->all());
-
-        if ($request->hasfile('photo')) {
-            $nama = time() . '-' . $request->file('photo')->getClientOriginalName();
-            $path = $request->file('photo')->storeAs('photo', $nama, ['disk' => 'public']);
-            $image = $path;
-            $crew->update(['photo' => $image]);
-        }
-
-
-        // toast('Berhasil di update', 'success');
-        return redirect()->back()
-            ->with('success', 'Crew updated successfully');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Crew $crew)
+    public function destroy(profile $profile)
     {
         //
     }

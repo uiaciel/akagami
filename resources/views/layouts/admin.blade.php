@@ -80,13 +80,15 @@
                         <li class="nav-item">
                             <div class="navbar-heading">Data</div>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link has-arrow " href="/company">
-                                <i data-feather="clipboard" class="nav-icon icon-xs me-2">
-                                </i> Profile
-                            </a>
-                        </li>
+                        @if (Auth::User()->profile)
+                            <li class="nav-item">
+                                <a class="nav-link has-arrow "
+                                    href=" {{ route('profile.show', Auth::User()->profile->crew->subid) }}">
+                                    <i data-feather="clipboard" class="nav-icon icon-xs me-2">
+                                    </i> Profile
+                                </a>
+                            </li>
+                        @endif
                     @endcan
                     @can('isAdmin')
                         <!-- Nav item -->
