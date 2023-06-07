@@ -93,7 +93,7 @@
 
     </div>
     <footer></footer>
-    <div class="page">
+    {{-- <div class="page">
         @include('crew.content')
-    </div>
+    </div> --}}
 @endsection

@@ -8,22 +8,26 @@
     <!-- Favicon icon-->
     <link rel="shortcut icon" type="image/x-icon" href="./assets/images/favicon/favicon.ico">
     <!-- Libs CSS -->
+    <title>PT AKBAR ANGKASA TARUNA - Internal System</title>
 
     <!-- Theme CSS -->
     <link href="{{ asset('assets/css/materialdesignicons.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/css/theme.css') }}">
 
-    <title>PT AKBAR ANGKASA TARUNA - Internal System</title>
-
+    <!-- Styles -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="/css/select2-bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
-
     <style>
         .navbar-vertical .navbar-brand img {
             height: 13rem;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+
     <script src="/tinymce/tinymce.min.js"></script>
     <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
@@ -42,23 +46,11 @@
             });
         });
     </script>
-
-
-
-    <!-- Styles -->
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-
-
     <script src="/js/select2.js"></script>
-
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" /> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
-    <link rel="stylesheet" href="/css/select2-bootstrap.css" />
-
-
+    <!-- Scripts -->
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 </head>
 
 <body class="bg-light">
@@ -75,6 +67,12 @@
                 <ul class="navbar-nav flex-column" id="sideNavbar">
                     <li class="nav-item">
                         <div class="navbar-heading">Dashboard</div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-arrow " href="/home">
+                            <i data-feather="clipboard" class="nav-icon icon-xs me-2">
+                            </i> Home
+                        </a>
                     </li>
                     @can('isCrew')
                         <li class="nav-item">
@@ -95,14 +93,12 @@
                         <li class="nav-item">
                             <div class="navbar-heading">Data</div>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link has-arrow " href="{{ route('company.index') }}">
                                 <i data-feather="clipboard" class="nav-icon icon-xs me-2">
                                 </i> Companies
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link has-arrow " href="/klien">
                                 <i data-feather="clipboard" class="nav-icon icon-xs me-2">
@@ -115,36 +111,30 @@
                                 </i> Vessel Names
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link has-arrow " href="{{ route('port.index') }}">
                                 <i data-feather="clipboard" class="nav-icon icon-xs me-2">
                                 </i> Ports
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link has-arrow " href="{{ route('job.index') }}">
                                 <i data-feather="clipboard" class="nav-icon icon-xs me-2">
                                 </i> Jobs
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link has-arrow " href="{{ route('national.index') }}">
                                 <i data-feather="clipboard" class="nav-icon icon-xs me-2">
                                 </i> Nationalities
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link has-arrow " href="{{ route('currency.index') }}">
                                 <i data-feather="clipboard" class="nav-icon icon-xs me-2">
                                 </i> Currencies
                             </a>
                         </li>
-
-
                         <!-- Nav item -->
                         <li class="nav-item">
                             <div class="navbar-heading">Management</div>
@@ -183,7 +173,6 @@
                             </ul>
                         </div>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse"
                             data-bs-target="#navPapers" aria-expanded="false" aria-controls="navPapers">
@@ -202,7 +191,6 @@
                                         Crew Contracts
                                     </a>
                                 </li>
-
                                 <li class="nav-item">
                                     <a class="nav-link " href="/papers">
                                         Crew List
@@ -288,7 +276,6 @@
                                 </ul>
                             </div>
                         </li>
-
                         <li class="nav-item">
                             <div class="navbar-heading">Settings</div>
                         </li>
@@ -326,8 +313,8 @@
                 <!-- navbar -->
                 <nav class="navbar-classic navbar navbar-expand-lg d-print-none">
                     <a id="nav-toggle" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-menu nav-icon me-2 icon-xs">
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -532,7 +519,6 @@
     <!-- Libs JS -->
     <script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-
     <script>
         $(document).ready(function() {
             $(".select2").select2({
@@ -546,11 +532,8 @@
     <script>
         $(document).ready(function() {
             datat = $('.datatable').DataTable({
-
                 "dom": 'lrtip',
                 "pageLength": 50
-
-
             });
             //selected row
             $('.datatable tbody').on('click', 'tr', function() {
@@ -560,16 +543,13 @@
             $('#button').click(function() {
                 // alert(table.rows('.selected').data().length + ' row(s) selected');
                 datanya = datat.rows('.selected').data()
-
             });
-
             //form cari data
             $('#caridata').keyup(function() {
                 datat.search($(this).val()).draw();
             })
         });
     </script>
-
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="bg-primary pt-10 pb-21"></div>
+    <div class="bg-primary pt-10 pb-21">
+    </div>
     <div class="container-fluid mt-n22 px-6">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12">
@@ -14,78 +15,80 @@
                         </div>
 
                         @if (!Auth::User()->profile)
-                            <div>
+                            @can('isCrew')
+                                <div>
 
-                                {{-- <a href="{{ route('crew.create') }}" class="btn btn-white">Create Profile</a> --}}
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                    data-bs-target="#crewcreate">
-                                    Create Profile
-                                </button>
+                                    {{-- <a href="{{ route('crew.create') }}" class="btn btn-white">Create Profile</a> --}}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                                        data-bs-target="#crewcreate">
+                                        Create Profile
+                                    </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="crewcreate" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="crewcreate" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <form action="{{ route('profile.store') }}" method="POST">
+                                                    @csrf
+
+
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputText1" class="form-label">Name</label>
+                                                            <input type="text" name="name" class="form-control"
+                                                                id="exampleInputText1" aria-describedby="textHelp">
+
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputText1" class="form-label">Subid</label>
+                                                            <input type="text" name="subid" class="form-control"
+                                                                id="exampleInputText1" aria-describedby="textHelp">
+
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputText1" class="form-label">Place</label>
+                                                            <input type="text" name="place" class="form-control"
+                                                                id="exampleInputText1" aria-describedby="textHelp">
+
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputText1" class="form-label">Birth</label>
+                                                            <input type="date" name="birth" class="form-control"
+                                                                id="exampleInputText1" aria-describedby="textHelp">
+
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <select class="form-select" name="job_id">
+
+                                                                @foreach ($jobs as $job)
+                                                                    <option value="{{ $job->id }}">{{ $job->code }}
+                                                                        ({{ $job->name }})
+                                                                    </option>
+                                                                @endforeach
+
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+
+                                                </form>
                                             </div>
-                                            <form action="{{ route('profile.store') }}" method="POST">
-                                                @csrf
-
-
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputText1" class="form-label">Name</label>
-                                                        <input type="text" name="name" class="form-control"
-                                                            id="exampleInputText1" aria-describedby="textHelp">
-
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputText1" class="form-label">Subid</label>
-                                                        <input type="text" name="subid" class="form-control"
-                                                            id="exampleInputText1" aria-describedby="textHelp">
-
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputText1" class="form-label">Place</label>
-                                                        <input type="text" name="place" class="form-control"
-                                                            id="exampleInputText1" aria-describedby="textHelp">
-
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputText1" class="form-label">Birth</label>
-                                                        <input type="date" name="birth" class="form-control"
-                                                            id="exampleInputText1" aria-describedby="textHelp">
-
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <select class="form-select" name="job_id">
-
-                                                            @foreach ($jobs as $job)
-                                                                <option value="{{ $job->id }}">{{ $job->code }}
-                                                                    ({{ $job->name }})
-                                                                </option>
-                                                            @endforeach
-
-                                                        </select>
-                                                    </div>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </div>
-
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endcan
                         @endif
 
 
@@ -136,6 +139,47 @@
                 </div>
             </div>
             <div class="col-8">
+                @can('isAdmin')
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="text-white">List Users</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No.</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Crew</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($users as $user)
+                                        <tr>
+                                            <th scope="row">{{ $loop->iteration }}</th>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->role }}</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>
+                                                @if ($user->profile)
+                                                    <a
+                                                        href="{{ route('crew.show', $user->profile->crew->subid) }}">{{ $user->profile->crew->subid ?? '' }}</a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5">Data Kosong</td>
+                                        </tr>
+                                    @endforelse
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endcan
                 @if (Auth::User()->profile)
                     <div class="card">
                         <div class="card-header bg-dark text-white">
@@ -156,7 +200,8 @@
                             <div class="form-group mb-3">
                                 <label for="exampleInputEmail1">Crew Job</label>
                                 <input type="text" name="nama" class="form-control"
-                                    value="{{ Auth::User()->profile->crew->job->name }}" id="exampleInputEmail1" readonly>
+                                    value="{{ Auth::User()->profile->crew->job->name }}" id="exampleInputEmail1"
+                                    readonly>
                             </div>
 
                             {{-- <table class="table table-striped table-bordered">

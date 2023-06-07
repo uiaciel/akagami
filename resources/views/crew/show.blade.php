@@ -3,14 +3,14 @@
     {{-- <div class="bg-primary pt-10 pb-21"></div> --}}
 
     <div class="container-fluid d-print-block">
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-primary" role="alert">
                     {{ $crew->subid }}
                 </div>
 
             </div>
-        </div>
+        </div> --}}
 
 
         <div class="collapse" id="addExp">
